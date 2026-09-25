@@ -95,3 +95,66 @@ Les différentes opérations testées sont :
 ###  Suppression d'un compte
 
 ![img_4.png](images/img_9.png)
+
+
+## 7. Documentation des API REST avec Swagger / OpenAPI
+
+Afin de faciliter la documentation et le test des API REST, **Swagger / OpenAPI** est intégré au projet.
+### Dépendance utilisée
+
+La dépendance suivante est ajoutée dans le fichier `pom.xml` :
+
+![img_5.png](img_5.png)
+
+### Accès à Swagger UI
+
+Après le démarrage de l'application, l'interface Swagger UI est accessible à l'adresse :
+
+```text
+http://localhost:8081/swagger-ui/index.htmlhtml
+```
+![img_1.png](img_1.png)
+
+Elle permet de visualiser les différentes API REST disponibles et de tester directement les endpoints.
+
+###  Documentation OpenAPI
+
+La spécification OpenAPI générée automatiquement est également accessible via :
+
+```text
+http://localhost:8081/v3/api-docs
+```
+![img.png](img.png)
+### Tests avec Swagger
+
+Swagger permet de tester directement les différentes opérations du microservice :
+
+![img_2.png](img_2.png)
+![img_3.png](img_3.png)
+
+
+## 8. Exposition d'une API REST avec Spring Data REST et Projections
+
+Dans cette étape, nous utilisons **Spring Data REST** afin d'exposer automatiquement les ressources de notre application sous forme d'API REST, directement à partir du `Repository`.
+
+### Dépendance utilisée
+
+La dépendance suivante est ajoutée dans le fichier `pom.xml` :
+
+![img_4.png](img_4.png)
+
+ L'annotation `@RepositoryRestResource` est ajoutée sur l'interface `BankAccountRepository` afin de demander à **Spring Data REST** d'exposer automatiquement le repository sous forme d'une API REST.
+
+###  Test de l'API
+
+Après le démarrage de l'application, les ressources exposées peuvent être testées avec Postman ou directement depuis le navigateur.
+
+
+
+![img_8.png](img_8.png)
+
+L'image suivante montre l'utilisation de la **projection** afin de retourner uniquement les attributs sélectionnés de l'entité `BankAccount`.
+
+![img_7.png](img_7.png)
+
+

@@ -12,6 +12,7 @@ import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping ("/api")
 public class BankAccountController {
    private BankAccountRepository bankAccountRepository;
 
