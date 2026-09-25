@@ -1,5 +1,8 @@
 package benassila.meryem.ebankservice.web;
 
+import benassila.meryem.ebankservice.Dtos.BanckAccountRequestDTO;
+import benassila.meryem.ebankservice.Dtos.BanckAccountResponseDTO;
+import benassila.meryem.ebankservice.Services.BankAccountService;
 import benassila.meryem.ebankservice.entities.BanckAccount;
 import benassila.meryem.ebankservice.enums.AccountType;
 import benassila.meryem.ebankservice.repositories.BankAccountRepository;
@@ -15,46 +18,33 @@ import java.util.UUID;
 @RequestMapping ("/api")
 public class BankAccountController {
    private BankAccountRepository bankAccountRepository;
+   private BankAccountService bankAccountService;
 
     @GetMapping("/bankaccounts")
-    private List<BanckAccount> getbankAccounts( ){
-        return bankAccountRepository.findAll();
+    private List<BanckAccountResponseDTO> getbankAccounts( ){
+        return bankAccountService.getBanckAccounts();
     }
 
-   @GetMapping("/bankaccounts/{id}")
-   private BanckAccount getbankAccount(@PathVariable String id ){
-       return bankAccountRepository.findById(id).orElseThrow(()->new RuntimeException(String.format("Account %s Not Found",id)));
 
+   @GetMapping("/bankaccounts/{id}")
+   private BanckAccountResponseDTO getbankAccount(@PathVariable String id ){
+       return bankAccountService.getBanckAccountById(id);
    }
 
     @PostMapping("/bankaccounts")
-    private BanckAccount createAccount(@RequestBody BanckAccount banckAccount){
-        System.out.println("err");
-        System.out.println(banckAccount.getId());
-        if (banckAccount.getId()== null) {
-            banckAccount.setId(UUID.randomUUID().toString());
-        }
-        System.out.println(banckAccount.getId());
-        if (banckAccount.getCreatedAt()== null) banckAccount.setCreatedAt(new Date());
-
-        return bankAccountRepository.save(banckAccount);
+    private BanckAccountResponseDTO createAccount(@RequestBody BanckAccountRequestDTO banckAccountRequestDTO){
+        return bankAccountService.createBankAccount(banckAccountRequestDTO);
 
     }
 
     @PutMapping("/bankaccounts/{id}")
-    private BanckAccount updateAccount(@PathVariable String id,@RequestBody BanckAccount banckAccount){//cette fonction pour out et patch
-        BanckAccount account = bankAccountRepository.findById(id).orElseThrow(()->new RuntimeException(String.format("Account %s Not Found",id)));
-        if(banckAccount.getBalance()!=null) account.setBalance(banckAccount.getBalance());//on a odifier double en Double pour valeur null
-        if(banckAccount.getAccountType()!=null) account.setAccountType(banckAccount.getAccountType());
-        if(banckAccount.getCurrency()!=null) account.setCurrency(banckAccount.getCurrency());
-        return bankAccountRepository.save(account);
-
+    private BanckAccountResponseDTO updateAccount(@PathVariable String id,@RequestBody BanckAccountRequestDTO banckAccountRequestDTO){//cette fonction pour out et patch
+      return  bankAccountService.updateBankAccount(banckAccountRequestDTO,id);
     }
 
     @DeleteMapping("/bankaccounts/{id}")
     private void deletebankAccount(@PathVariable String id ){
-        BanckAccount account = bankAccountRepository.findById(id).orElseThrow(()->new RuntimeException(String.format("Account %s Not Found",id)));
-        bankAccountRepository.deleteById(id);
+       bankAccountService.deleteBanckAccount(id);
 
     }
 
