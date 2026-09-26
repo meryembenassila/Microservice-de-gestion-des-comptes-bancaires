@@ -157,4 +157,91 @@ L'image suivante montre l'utilisation de la **projection** afin de retourner uni
 
 ![img_7.png](img_7.png)
 
+## 9. Création des DTOs et des Mappers
 
+Afin de séparer les données exposées par l'API de l'entité JPA, nous avons créé des **DTOs** pour les requêtes et les réponses.
+
+###  DTOs
+
+- `BanckAccountRequestDTO` : données reçues lors d'une création ou modification.
+- `BanckAccountResponseDTO` : données retournées au client.
+
+###  Mapper
+
+Un mapper permet de convertir l'entité `BanckAccount` en DTO de réponse et un mapper pour   convertir DTO de request en `BanckAccount`
+
+
+## 10. Création de la couche Service
+
+Une **couche Service** est ajoutée afin de centraliser la logique métier de l'application et de séparer cette logique du contrôleur.
+
+Le service utilise le `BankAccountRepository` pour effectuer les opérations sur les comptes.
+
+
+
+## 11. Création d'un Web Service GraphQL
+
+Dans cette dernière étape, nous avons ajouté une **API GraphQL** au microservice de gestion des comptes bancaires.
+
+L'objectif est de permettre au client d'interroger et de manipuler les comptes bancaires à travers GraphQL.
+
+###  Création du schéma GraphQL
+
+Le schéma GraphQL est défini dans le fichier :
+
+```text
+src/main/resources/graphql/schema.graphqls
+```
+
+Il permet de définir les types disponibles ainsi que les opérations accessibles par le client.
+![img.png](img.png)
+
+###  Les Query
+
+Une **Query** permet de récupérer des données sans les modifier.
+
+Dans notre cas, deux opérations sont définies :
+
+* `accountsList` : récupérer la liste des comptes ;
+* `accountById` : récupérer un compte à partir de son identifiant.
+* `customersList` : récupérer la liste des clients ;
+
+### Les Mutation
+
+Une **Mutation** permet de modifier les données, par exemple pour créer, modifier ou supprimer une ressource.
+
+Dans notre projet, trois mutations sont implémentées :
+
+- `createaccount` : créer un nouveau compte bancaire ;
+- `updateaccount` : modifier un compte bancaire existant ;
+- `deleteaccount` : supprimer un compte bancaire à partir de son identifiant.
+
+### Création du contrôleur GraphQL
+
+Un contrôleur dédié permet de relier les opérations définies dans le schéma GraphQL aux méthodes Java.
+
+![img_1.png](img_1.png)
+
+![img_2.png](img_2.png)
+
+
+### Gestion des erreurs GraphQL
+
+Afin d'améliorer la gestion des erreurs retournées par l'API GraphQL, un resolver d'exception personnalisé est ajouté au projet.
+
+La classe `BankAccountFetcherExceptionResolver` hérite de `DataFetcherExceptionResolverAdapter` et permet d'intercepter les exceptions générées lors de l'exécution des opérations GraphQL.
+
+![img_9.png](img_9.png)
+
+Cette configuration permet notamment de retourner au client le message de l'exception au lieu d'une erreur GraphQL générique.
+
+
+###  Test du service GraphQL
+
+Les différentes opérations GraphQL sont testées afin de vérifier leur bon fonctionnement.
+![img_3.png](img_3.png)
+![img_4.png](img_4.png)
+![img_5.png](img_5.png)
+![img_6.png](img_6.png)
+![img_7.png](img_7.png)
+![img_8.png](img_8.png)
