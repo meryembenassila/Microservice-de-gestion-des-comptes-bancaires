@@ -104,7 +104,7 @@ Afin de faciliter la documentation et le test des API REST, **Swagger / OpenAPI*
 
 La dépendance suivante est ajoutée dans le fichier `pom.xml` :
 
-![img_5.png](img_5.png)
+![img_5.png](images/image%20(6).png)
 
 ### Accès à Swagger UI
 
@@ -113,7 +113,7 @@ Après le démarrage de l'application, l'interface Swagger UI est accessible à 
 ```text
 http://localhost:8081/swagger-ui/index.htmlhtml
 ```
-![img_1.png](img_1.png)
+![img_2.png](images/image%20(2).png)
 
 Elle permet de visualiser les différentes API REST disponibles et de tester directement les endpoints.
 
@@ -124,13 +124,14 @@ La spécification OpenAPI générée automatiquement est également accessible v
 ```text
 http://localhost:8081/v3/api-docs
 ```
-![img.png](img.png)
+![img_5.png](images/image%20(1).png)
 ### Tests avec Swagger
 
 Swagger permet de tester directement les différentes opérations du microservice :
 
-![img_2.png](img_2.png)
-![img_3.png](img_3.png)
+![img_5.png](images/image%20(3).png)
+
+![img_5.png](images/image%20(4).png)
 
 
 ## 8. Exposition d'une API REST avec Spring Data REST et Projections
@@ -141,7 +142,7 @@ Dans cette étape, nous utilisons **Spring Data REST** afin d'exposer automatiqu
 
 La dépendance suivante est ajoutée dans le fichier `pom.xml` :
 
-![img_4.png](img_4.png)
+![img_5.png](images/image%20(5).png)
 
  L'annotation `@RepositoryRestResource` est ajoutée sur l'interface `BankAccountRepository` afin de demander à **Spring Data REST** d'exposer automatiquement le repository sous forme d'une API REST.
 
@@ -151,11 +152,11 @@ Après le démarrage de l'application, les ressources exposées peuvent être te
 
 
 
-![img_8.png](img_8.png)
+![img_5.png](images/image%20(7).png)
 
 L'image suivante montre l'utilisation de la **projection** afin de retourner uniquement les attributs sélectionnés de l'entité `BankAccount`.
 
-![img_7.png](img_7.png)
+![img_5.png](images/image%20(8).png)
 
 ## 9. Création des DTOs et des Mappers
 
@@ -194,6 +195,7 @@ src/main/resources/graphql/schema.graphqls
 ```
 
 Il permet de définir les types disponibles ainsi que les opérations accessibles par le client.
+
 ![img.png](img.png)
 
 ###  Les Query
@@ -220,10 +222,10 @@ Dans notre projet, trois mutations sont implémentées :
 
 Un contrôleur dédié permet de relier les opérations définies dans le schéma GraphQL aux méthodes Java.
 
-![img_1.png](img_1.png)
 
-![img_2.png](img_2.png)
+![img_5.png](images/imge%20(8).png)
 
+![img_5.png](images/imge%20(9).png)
 
 ### Gestion des erreurs GraphQL
 
@@ -231,7 +233,7 @@ Afin d'améliorer la gestion des erreurs retournées par l'API GraphQL, un resol
 
 La classe `BankAccountFetcherExceptionResolver` hérite de `DataFetcherExceptionResolverAdapter` et permet d'intercepter les exceptions générées lors de l'exécution des opérations GraphQL.
 
-![img_9.png](img_9.png)
+![img_5.png](images/imge%20(7).png)
 
 Cette configuration permet notamment de retourner au client le message de l'exception au lieu d'une erreur GraphQL générique.
 
@@ -239,9 +241,10 @@ Cette configuration permet notamment de retourner au client le message de l'exce
 ###  Test du service GraphQL
 
 Les différentes opérations GraphQL sont testées afin de vérifier leur bon fonctionnement.
-![img_3.png](img_3.png)
-![img_4.png](img_4.png)
-![img_5.png](img_5.png)
-![img_6.png](img_6.png)
-![img_7.png](img_7.png)
-![img_8.png](img_8.png)
+
+![img_5.png](images/imge%20(1).png)
+![img_5.png](images/imge%20(2).png)
+![img_5.png](images/imge%20(3).png)
+![img_5.png](images/imge%20(4).png)
+![img_5.png](images/imge%20(5).png)
+![img_5.png](images/imge%20(6).png)
